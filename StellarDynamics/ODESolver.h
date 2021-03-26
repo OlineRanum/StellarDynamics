@@ -8,7 +8,7 @@ class ODESolver
 public:
     void Verlet(double* x, double* y, double* z, double*vx , double* vy, double* vz, int N, double h, double* a);
     double Newtonian(double r);
-    double PostNewtonian(double r, double v);
+    double PostNewtonian(double r, double v, double rdotv);
 };
 
 #endif // FORWARDEULER_H

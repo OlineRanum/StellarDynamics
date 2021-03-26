@@ -12,12 +12,13 @@ double ODESolver::Newtonian(double r){
     return -G*M_S/(r*r*r);
 }
 
-double ODESolver::PostNewtonian(double r, double v){
+double ODESolver::PostNewtonian(double r, double v, double rdotv){
     double G = 4*M_PI*M_PI;
     double M_BH = 4.15*pow(10, 6);                  // M-BH = 4.10*10^6 M-Sun, units in solar units
     double M_S = M_BH;
     double c = 63198;
-    return 0;
+
+    return -G*M_S/(pow(c,2)*pow(r,3))*(r*(pow(c,2)-4*G*M_S/r+pow(v,2)) - 4*v*rdotv);
 }
 
 void ODESolver::Verlet(double* x, double* y, double* z,  double*vx , double* vy, double* vz, int N, double h, double* a){
@@ -29,9 +30,10 @@ void ODESolver::Verlet(double* x, double* y, double* z,  double*vx , double* vy,
 
     double r0 = sqrt(x[0]*x[0] + y[0]*y[0] + z[0]*z[0]);
     double v0 = sqrt(vx[0]*vx[0] + vy[0]*vy[0] + vz[0]*vz[0]);
+    double r0dotv0 = x[0]*vx[0] + y[0]*vy[0] + z[0]*vz[0];
     cout << x[0] << " " << y[0] << " " << z[0] << "\n";
     a[0] = Newtonian(r0);
-    //a[0] = G*M_S/(pow(c, 2)*pow(r0,3))*(pow(c, 2) + pow(v0, 2) + );
+    //a[0] = PostNewtonian(r0, v0, r0dotv0);
     clock_t st, fi;
     st = clock();
     for (int i = 1; i < N; i++ ){
@@ -42,6 +44,10 @@ void ODESolver::Verlet(double* x, double* y, double* z,  double*vx , double* vy,
 
         double r = sqrt(x[i]*x[i] + y[i]*y[i] + z[i]*z[i]);
         a[i] = Newtonian(r);
+
+        double v = sqrt(vx[i-1]*vx[i-1] + vy[i-1]*vy[i-1] + vz[i-1]*vz[i-1]);
+        double rdotv_ = x[i]*vx[i-1] + y[i]*vy[i-1] + z[i]*vz[i-1];
+        //a[i] = PostNewtonian(r, v, rdotv_);
 
         vx[i] = vx[i-1]+h/2*(a[i]*x[i] + a[i-1]*x[i-1]);
         vy[i] = vy[i-1]+h/2*(a[i]*y[i] + a[i-1]*y[i-1]);
