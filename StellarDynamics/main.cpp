@@ -9,8 +9,8 @@ using namespace std;
 
 int main()
 {
-    int N = 1e7;
-    double t0 = 0; double tf = 20;     // Years
+    int N = 1e8;
+    double t0 = 0; double tf = 16.2;     // Years
     double h = (tf-t0)/N;
     double * t = new double [N];
     for (int i=0; i <N; i ++){t[i] = t0 + i*h;}
@@ -43,12 +43,12 @@ int main()
     double * vy = new double [N];
     double * vz = new double [N];
     double * a = new double [N];
-    x[0] = 1;
-    y[0] = 0;
+    x[0] = -1901.5;
+    y[0] = -9;
     z[0] = 0;
     vx[0] = 0;
-    vy[0] = 6.28;
-    vz[0] = 0;
+    vy[0] = 106.3*0.869;
+    vz[0] = 106.3*0.493;
 
     ODES -> Verlet(x, y, z, vx , vy, vz, N, h, a);
     WR -> WR_5A(t, x, y, z, vx, vy, vz, N, "ODESolved");

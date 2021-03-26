@@ -57,6 +57,7 @@ vector<vector<double>> ReadFiles::Read_InitialConditions_from_file()
     ifstream myfile ("InitialConditions.txt");
     while(myfile >> a >> b >> c >> d >> e >> f){
         vector<double> temp = {stof(a), stof(b), stof(c), stof(d), stof(e), stof(f)};
+        cout << "A is " <<  stof(a);
         initialConditions.push_back(temp);
     }
     return initialConditions;

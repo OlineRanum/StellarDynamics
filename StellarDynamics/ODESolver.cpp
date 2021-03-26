@@ -8,9 +8,9 @@ using namespace std;
 void ODESolver::Verlet(double* x, double* y, double* z,  double*vx , double* vy, double* vz, int N, double h, double* a){
     // To run the velocity Verlet ODESolver for a 2-body system
     double G = 4*M_PI*M_PI;
-    double M_BH = 1;
-    double M_S = 1;
-    double c = 1;
+    double M_BH = 4.15*pow(10, 6);                  // M-BH = 4.10*10^6 M-Sun, units in solar units
+    double M_S = M_BH;
+    double c = 63198;
 
     double r0 = sqrt(x[0]*x[0] + y[0]*y[0] + z[0]*z[0]);
     double v0 = sqrt(vx[0]*vx[0] + vy[0]*vy[0] + vz[0]*vz[0]);

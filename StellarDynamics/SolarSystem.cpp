@@ -33,18 +33,6 @@ void SolarSystem::CreateSolarSystem(vector<string> Names, vector<double> Mass, v
             SolarSystem_planets[0]->az[i]  = 0; }
     }
 
-    if (mode == "FIXMERC"){
-        for (int i = 0; i < N; i++){
-            SolarSystem_planets[0]->x[i]  = 0;
-            SolarSystem_planets[0]->y[i]  = 0;
-            SolarSystem_planets[0]->z[i]  = 0;
-            SolarSystem_planets[0]->vx[i] = 0;
-            SolarSystem_planets[0]->vy[i] = 0;
-            SolarSystem_planets[0]->vz[i] = 0;
-            SolarSystem_planets[0]->ax[i]  = 0;
-            SolarSystem_planets[0]->ay[i]  = 0;
-            SolarSystem_planets[0]->az[i]  = 0; }
-    }
 
 }
 
