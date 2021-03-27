@@ -10,7 +10,7 @@ using namespace std;
 int main()
 {
     int N = 1e8;
-    double t0 = 0; double tf = 100;     // Years
+    double t0 = 0; double tf = 50;     // Years
     double h = (tf-t0)/N;
     double * t = new double [N];
     for (int i=0; i <N; i ++){t[i] = t0 + i*h;}
@@ -47,11 +47,15 @@ int main()
     y[0] = -9;
     z[0] = 0;
     vz[0] = 0;
-    vy[0] = 106.3*0.869;
-    vx[0] = 106.3*0.493;
+    vy[0] = 106.3; //*0.869;
+    vx[0] = 1; //106.3*0.493;
 
+    /*
     ODES -> RK4_PostNewtonian(x, y, z, vx , vy, vz, N, h, a);
-    WR -> WR_5A(t, x, y, z, vx, vy, vz, N, "ODESolved");
+    WR -> WR_5A(t, x, y, z, vx, vy, vz, N, "ODESolvedPostNewtonian");
+    */
+    ODES -> RK4_Newtonian(x, y, z, vx , vy, vz, N, h, a);
+    WR -> WR_5A(t, x, y, z, vx, vy, vz, N, "ODESolvedNewtonian");
 
     cout << "Run Complete"<< "\n";
     delete [] x; delete [] y ; delete [] z; delete [] vx; delete [] vy; delete[] vz; delete [] a;
